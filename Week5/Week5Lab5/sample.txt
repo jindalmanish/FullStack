@@ -1,0 +1,5 @@
+What is fs module in Nodejs?
+The built-in Node. js file system module helps us store,
+access, and manage data on our operating system. 
+Commonly used features of the fs module include fs.readFile to read data from a file, 
+fs. writeFile to write data to a file and replace the file if it already exists

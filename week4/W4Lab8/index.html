@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 4 Lab 8: HTML Attribute vs DOM Property</title>
+</head>
+<body>
+    <h2>HTML Attribute</h2>
+    <input value="Click me" onclick="alert('Click!')" type="button">
+</body>
+</html>
+
+<script>
+    const elem = document.createElement('input');
+    elem.type = 'button';
+    elem.value = 'Click me';
+    elem.onclick = function() {
+        alert('Thank you');
+    };
+    document.body.appendChild(elem);
+</script>
