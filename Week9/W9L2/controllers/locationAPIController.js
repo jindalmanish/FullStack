@@ -1,85 +1,85 @@
-const Goal = require("../models/goalModel");
+const Location = require("../models/locationModel");
 
-// get all Goals
-const getGoals = async (req, res) => {
+// get all Locations
+const getLocations = async (req, res) => {
   try {
-    const goals = await Goal.find({});
-    res.status(200).json(goals);
+    const locations = await Location.find({});
+    res.status(200).json(locations);
   } catch (error) {
     console.error("Error rendering index.html:", error);
     res.status(500).send("Internal Server Error");
   }
 };
 
-// Add one Goal
-const addGoal = async (req, res) => {
+// Add one Location
+const addLocation = async (req, res) => {
   // console.log();
   try {
-    const { title, description, targetDate, achieved } = req.body;
-    const newGoal = new Goal({ title, description, targetDate, achieved });
-    await newGoal.save();
-    res.status(201).json(newGoal);
+    const { name, address, latitude, longitude } = req.body;
+    const newLocation = new Location({ name, address, latitude, longitude });
+    await newLocation.save();
+    res.status(201).json(newLocation);
   } catch (error) {
     console.error("Error rendering index.html:", error);
     res.status(500).send("Internal Server Error");
   }
 };
 
-// Get Goal by ID
-const getGoal = async (req, res) => {
+// Get Location by ID
+const getLocation = async (req, res) => {
   try {
     const { id } = req.params;
-    const goal = await Goal.findById(id);
-    if (!goal) {
-      return res.status(404).json({ message: "Goal not found" });
+    const location = await Location.findById(id);
+    if (!location) {
+      return res.status(404).json({ location: "Location not found" });
     }
-    res.status(200).json(goal);
+    res.status(200).json(location);
   } catch (error) {
     console.error("Error rendering index.html:", error);
     res.status(500).send("Internal Server Error");
   }
 };
 
-// Delete Goal by ID
-const deleteGoal = async (req, res) => {
+// Delete Location by ID
+const deleteLocation = async (req, res) => {
   try {
     const { id } = req.params;
-    const goal = await Goal.findByIdAndDelete({ _id: id });
-    if (!goal) {
-      return res.status(404).json({ message: "Goal not found" });
+    const location = await Location.findByIdAndDelete({ _id: id });
+    if (!location) {
+      return res.status(404).json({ location: "Location not found" });
     }
-    res.status(200).json({ message: "Goal deleted successfully" });
+    res.status(200).json({ location: "Location deleted successfully" });
   } catch (error) {
     console.error("Error rendering index.html:", error);
     res.status(500).send("Internal Server Error");
   }
 };
 
-// Delete all Goals
-const deleteAllGoals = async (req, res) => {
+// Delete all Locations
+const deleteAllLocations = async (req, res) => {
   try {
-    const result = await Goal.deleteMany({});
+    const result = await Location.deleteMany({});
     res
       .status(200)
-      .json({ message: `Deleted ${result.deletedCount} books successfully` });
+      .json({ location: `Deleted ${result.deletedCount} books successfully` });
   } catch (error) {
     console.error("Error rendering index.html:", error);
     res.status(500).send("Internal Server Error");
   }
 };
 
-// Update Goal by ID
-const updateGoal = async (req, res) => {
+// Update Location by ID
+const updateLocation = async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedGoal = req.body;
-    // const goal = await Goal.findOneAndUpdate({ _id: id }, updatedGoal);
-    const goal = await Goal.findOneAndUpdate({ _id: id }, updatedGoal, { new: true });
+    const updatedLocation = req.body;
+    // const location = await Location.findOneAndUpdate({ _id: id }, updatedLocation);
+    const location = await Location.findOneAndUpdate({ _id: id }, updatedLocation, { new: true });
 
-    if (!goal) {
-      return res.status(404).json({ message: "Goal not found" });
+    if (!location) {
+      return res.status(404).json({ location: "Location not found" });
     }
-    res.status(200).json(goal);
+    res.status(200).json(location);
   } catch (error) {
     console.error("Error rendering index.html:", error);
     res.status(500).send("Internal Server Error");
@@ -87,10 +87,10 @@ const updateGoal = async (req, res) => {
 };
 
 module.exports = {
-  getGoals,
-  addGoal,
-  getGoal,
-  deleteGoal,
-  deleteAllGoals,
-  updateGoal,
+  getLocations,
+  addLocation,
+  getLocation,
+  deleteLocation,
+  deleteAllLocations,
+  updateLocation,
 };
